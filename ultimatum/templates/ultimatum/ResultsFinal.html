@@ -1,0 +1,40 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+
+        Results
+
+{% endblock %}
+
+{% block content %}
+    {% if is_proposer == False %}
+        <p>Your final round payoff is determined by the other player.</p>
+    {% endif %}
+    <p>Thank you for participating in this study. Your final payoff is calculated based on
+    other participants' actions. You will receive your payment within 24 hours
+    after we verify your responses.</p>
+
+    <p>Our research intends to explore how the bargain works when uncertainty exists.
+    We are also interested in the behavioral changes in reaction to varying risks.
+    This research helps us better understand some real world questions in politics and business particularly.</p>
+
+    <p>For participants assigned as Proposers, we are interested in your offers when facing the uncertainty
+    that your opponent may reject and obtain the right to allocate.
+    Also, the change of behaviors in response to the change of uncertainty is also of interest.
+    For participants assigned as Responders, we want to observe your decision to accept or reject
+    when the uncertainty varies.</p>
+
+    <p>We also collected information of your demographic characteristics and risk attitude,
+    these are factors that may be related to your decisions.</p>
+
+    <p>We hope you enjoyed the experience of participating!</p>
+
+    <p>If you have more questions about this study, please contact
+    Shirui Wang at wsr@iastate.edu; or Elizabeth Hoffman at bhoffman@iastate.edu.</p>
+
+
+    {% next_button %}
+.
+{% endblock %}
+

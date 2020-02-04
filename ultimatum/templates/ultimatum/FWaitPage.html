@@ -1,0 +1,30 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+{% block title %}
+    Wait for response
+{% endblock %}
+{% block content %}
+
+{% next_button %}
+
+    <script>
+    var showButton = document.getElementsByClassName("btn btn-primary btn-large btn-primary next-button")[0];
+    var counter = 5;
+    var newElement = document.createElement("p");
+    newElement.innerHTML = "Please wait for the other player...";
+    var interval;
+
+    showButton.parentNode.replaceChild(newElement, showButton);
+
+    interval = setInterval(function() {
+        counter--;
+        if(counter < 0) {
+            newElement.parentNode.replaceChild(showButton, newElement);
+            clearInterval(interval);
+        } else {
+            newElement.innerHTML = "Please wait for the other player...";
+        }
+    }, 1000);
+
+    </script>
+{% endblock %}

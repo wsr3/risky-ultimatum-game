@@ -1,0 +1,54 @@
+    {% load staticfiles otree_tags %}
+
+<div class="instructions well well-lg">
+
+    <h3 class="panel-sub-heading">
+        Instructions
+    </h3>
+
+    <div class="panel-body">
+        <p>
+            Welcome to the study of bargaining game. You MUST be at least 18 
+            years old to participate. This experiment will NOT
+            be linked to your personal information at Amazon Mechanical Turk. 
+            You will be randomly matched with another player to play the game.
+            Your final compensation may vary from 0 to 7 dollars depending on 
+            your decisions. The game will take approximately 20 minutes. 
+        </p>
+        {% if is_proposer == True %}
+        <p>
+            You are randomly assigned as <strong>“Proposer”</strong>
+            and will remain the role throughout the game.
+            <strong>Each round</strong>, you will be randomly matched with a
+            <strong>new player</strong> whose role is the "Responder",
+            with whom you will decide how to
+            allocate 100 “points”. You will need to wait for the other
+            player’s response to continue in each round.
+        </p>
+        {% else %}
+        <p>
+            You are randomly assigned as <strong>“Responder”</strong>
+            and will remain the role throughout the game.
+            <strong>Each round</strong>, you will be randomly matched with a
+            <strong>new player</strong> whose role is the "Proposer",
+            with whom you will decide how to
+            allocate 100 “points”. You will need to wait for the other
+            player’s response to continue in each round.
+        </p>
+        {% endif %}
+
+        <p>
+            There will be 8 rounds in total. Your final payoff will be shown in the
+            end of the game. Each point is worth 1 cent. For example, you
+            will receive 5 dollars if you have 500 points in the end.
+        </p>
+
+        <p>
+            The instructions will remain on your screen for future reference.
+            Please click next and wait to be matched with a player.
+
+        </p>
+
+    </div>
+
+</div>

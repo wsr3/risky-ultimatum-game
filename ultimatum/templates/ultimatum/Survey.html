@@ -1,0 +1,25 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Survey
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Please answer the following questions and proceed to see your final payoff.
+    </p>
+
+    {% formfield player.q_age %}
+    {% formfield player.q_gender %}
+    {% formfield player.q_education %}
+    {% formfield player.q_income %}
+    {% formfield player.q_gamble %}
+    {% formfield player.q_fair %}
+    {% formfield player.q_risk %}
+
+    {% next_button %}
+
+{% endblock %}
+

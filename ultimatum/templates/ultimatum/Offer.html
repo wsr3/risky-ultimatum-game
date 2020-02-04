@@ -1,0 +1,116 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+
+{% block title %}
+
+        Your role and decision
+
+{% endblock %}
+
+{% block content %}
+
+    {% if player.round_number == 2 %}
+        <p><strong>You are the Proposer.</strong> This is ROUND {{ group.round_number }} and you are
+        matched with a new player.</p>
+        <p>In this round you have the right to allocate 100 "points" between you and the Responder.</p>
+        <p><strong>However</strong>, the Responder can choose to accept or reject your offer.</p>
+        <p>If the Responder accepts your offer, the deal is made.</p>
+        <p>If Responder chooses to reject, you will <strong>both get zero</strong> in this round.</p>
+
+    {% elif player.round_number < 8 %}
+        <p><strong>You are the Proposer.</strong> This is ROUND {{ group.round_number }} and you are
+        matched with a new player.</p>
+        <p>In this round you have the right to allocate 100 "points" between you and the Responder.
+            The Responder can choose to accept or reject your offer.</p>
+        <p>If your offer is accepted, the deal is made.</p>
+
+        {% if group.round_number != 6 %}
+        <p>But if your offer is rejected, the Responder can play a lottery with
+            <strong>{{ win_pct }}</strong> chance of winning.
+            (In other words,imagine picking a number from 1 to 10.
+            Winning the lottery means getting any number from <strong>1 to {{ win_num }}</strong>.)</p>
+
+        {% else %}
+         <p>But if your offer is rejected, the Responder can play a lottery with
+            <strong>{{ win_pct }}</strong> chance of winning.
+            (In other words,imagine picking a number from 1 to 10.
+            Winning the lottery means getting <strong>number 1</strong>.)</p>
+         {% endif %}
+
+        <p>Then, if he/she wins the lottery, the right to allocate the points shifts to the Responder.
+            He/she can determine the allocation <strong>without your agreement</strong>,
+            like what you did in ROUND 1. However, if the Responder doesn’t win the lottery,
+            you will <strong>both get zero</strong> in this round.</p>
+        <p>Remember, the Responder can play the lottery <strong>only if</strong> he/she rejects your offer.</p>
+
+        {% if player.round_number == 3 %}
+            <p>This is a practice round to make sure that you understand the rules. This is
+                <strong>the only round</strong> that will not be used to calculate your payoff.</p>
+        {% endif %}
+
+    {% else %}
+        <p><strong>You are the Proposer.</strong> This is the final round, and you are matched with a new player.</p>
+        <p>In this round you have the right to allocate 100 "points" between you and the Responder.
+            The Responder can choose to accept or reject your offer.</p>
+        <p>If your offer is accepted, the deal is made.</p>
+        <p>But if your offer is rejected, the Responder <strong>doesn't have to play the lottery</strong>
+            this time, but will get the right to allocate the points.
+            He/she can determine the allocation <strong>without your agreement</strong>,
+            like what you did in ROUND 1.</p>
+    {% endif %}
+
+    {% formfield player.amount_offered with label="How much would you like to offer to the other player?" %}
+
+    {% next_button %}
+
+    {% if player.round_number == 3 or player.round_number == 4%}
+    <script>
+
+    var showButton = document.getElementsByClassName("btn btn-primary btn-large btn-primary next-button")[0];
+    var counter = 30;
+    var newElement = document.createElement("p");
+    newElement.innerHTML = "Please wait for at least " + counter + " seconds.";
+    var interval;
+
+    showButton.parentNode.replaceChild(newElement, showButton);
+
+    interval = setInterval(function() {
+        counter--;
+        if(counter < 0) {
+            newElement.parentNode.replaceChild(showButton, newElement);
+            clearInterval(interval);
+        } else {
+            newElement.innerHTML = "Please wait for at least " + counter.toString() + " seconds.";
+        }
+    }, 1000);
+
+    </script>
+    {% else %}
+    <script>
+
+    var showButton = document.getElementsByClassName("btn btn-primary btn-large btn-primary next-button")[0];
+    var counter = 20;
+    var newElement = document.createElement("p");
+    newElement.innerHTML = "Please wait for at least " + counter + " seconds.";
+    var interval;
+
+    showButton.parentNode.replaceChild(newElement, showButton);
+
+    interval = setInterval(function() {
+        counter--;
+        if(counter < 0) {
+            newElement.parentNode.replaceChild(showButton, newElement);
+            clearInterval(interval);
+        } else {
+            newElement.innerHTML = "Please wait for at least " + counter.toString() + " seconds.";
+        }
+    }, 1000);
+
+    </script>
+    {% endif %}
+    {% include Constants.instructions_template %}
+
+
+{% endblock %}
+

@@ -1,0 +1,51 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+
+{% block title %}
+
+        Your role and decision
+
+{% endblock %}
+
+{% block content %}
+
+    <p><strong>You are the Proposer.</strong> This is ROUND {{ player.round_number }}</p>
+    <p>In this round you have the right to allocate 100 "points" between you and the Responder.</p>
+    <p>The Responder <strong>has to accept</strong> whatever amount you offer to him/her.</p>
+
+    {% formfield player.amount_offered with label="How much would you like to offer to the other player?" %}
+
+    {% formfield player.pMAO with label="If you were the responder, what is the minimum amount that you are willing to accept?" %}
+
+    {% next_button %}
+<!--
+    <p>
+        <input class="btn btn-primary btn-large btn-primary next-button" type="submit" value="Next"/>
+    </p>
+-->
+    <script>
+
+    var showButton = document.getElementsByClassName("btn btn-primary btn-large btn-primary next-button")[0];
+    var counter = 20;
+    var newElement = document.createElement("p");
+    newElement.innerHTML = "Please wait for at least " + counter + " seconds.";
+    var interval;
+
+    showButton.parentNode.replaceChild(newElement, showButton);
+
+    interval = setInterval(function() {
+        counter--;
+        if(counter < 0) {
+            newElement.parentNode.replaceChild(showButton, newElement);
+            clearInterval(interval);
+        } else {
+            newElement.innerHTML = "Please wait for at least " + counter.toString() + " seconds.";
+        }
+    }, 1000);
+
+    </script>
+    {% include Constants.instructions_template %}
+
+{% endblock %}
+
